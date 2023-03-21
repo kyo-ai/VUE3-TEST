@@ -32,6 +32,7 @@ export default defineComponent({
     const sonMsg2 = ref("传给孙子的信息2");
     function changeMsg(){
       console.log(context, "PPPPPPPPP",props.msg)
+      //两种方法均可。第二种较为简便
       //context.emit('childHandle', 999)
       context.emit('update:msg', 777)
     }
