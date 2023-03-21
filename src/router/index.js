@@ -1,12 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+const notFoundRoute = [
+  {
+    path: '/404',
+    component: () => import( '@/components/not-found/Error404.vue' )
+  },
+  //不识别的路由直接重定向到404页面
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/404'
+  },
+]
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
   },
+
   //父子孙间通信
   {
     path: '/contact-test',
@@ -61,16 +73,45 @@ const paramsRoute = [
   },
 ]
 
-// view Plus 组件view-menu 练习
-const viewMenuRoute = [
+//$on、$off、$once 测试路由
+const eventContactRoute = [
   {
-    path: '/view-menu-test',
-    name: 'viewMenu',
-    component: () => import( '../views/view-menu-test/index.vue' )
+    path: '/event-contact',
+    name: 'EventContact',
+    component: () => import( '../views/on-off-once/index.vue' )
+  },
+  {
+    path: '/event-contact-son',
+    name: 'EventContactSon',
+    component: () => import( '../views/on-off-once/event-contact/Son.vue' )
   },
 ]
 
-const allroutes = routes.concat(paramsRoute).concat(viewMenuRoute)
+//动态权限相关路由测试首页
+const powerRoute = [
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import( '../views/admin-router/index.vue' )
+  },
+]
+//需要动态添加的超级管理员的路由
+export const superAdminRoute = [
+  {
+    path: '/super-admin',
+    name: 'SuperAdmin',
+    component: () => import( '../views/admin-router/SuperAdmin.vue' ),
+    children:[
+      {
+        path: '/super-admin-child',
+        name: 'SuperAdminChild',
+        component: () => import( '../views/admin-router/SuperAdminChild.vue' )
+      }
+    ]
+  },
+]
+
+const allroutes = routes.concat(paramsRoute).concat(eventContactRoute).concat(powerRoute).concat(notFoundRoute)
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes: allroutes
