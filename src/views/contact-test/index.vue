@@ -35,7 +35,6 @@ export default defineComponent({
     Child
   },
   setup() {
-    console.log("setup")
     onBeforeMount(() => {
       console.log("mounted前")
     })
@@ -107,6 +106,8 @@ export default defineComponent({
     function childHandle(value){
       msg.value = value
     }
+
+    /* Promise本身是同步，但.then后面的是异步的，如需等到执行完，需要在函数前增加async await */
     /* async function getPromise(){
       await promiseThen().then((res)=>{
         console.log(res,"MY WORLD")
@@ -116,9 +117,9 @@ export default defineComponent({
 
     function getPromise(){
       promiseThen().then((res)=>{
-        console.log(res,"MY WORLD")
+        console.log(res,"Promise中.then的打印值")
       });
-      console.log("ATATATAT")
+      console.log("同步函数中打印的值")
     }
 
 
