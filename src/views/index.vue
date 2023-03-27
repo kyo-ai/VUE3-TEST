@@ -1,16 +1,17 @@
 <template>
   <div>
-    <h2>我是one组件</h2>
+    132 
+    <a href="#">打发顺丰</a>
   </div>
 </template>
-
-<script >
+ 
+<script>
 import {defineComponent, onMounted} from "vue"
 
 export default defineComponent({
   setup(){
     onMounted(()=>{
-      console.log("XXXXXXXXX")
+      console.log(import.meta.env,"KKKKK",import.meta.env.VITE_APP_TITLE)
     })
   }
 })
