@@ -19,7 +19,7 @@
     <p>fullName:{{ fullName }}</p>
   </div>
   
-  <div><Child v-model:msg="msg" @childHandle="childHandle" /></div>
+  <div><Child v-model:msg="msg" v-model:rename="person1.name"  @childHandle="childHandle" /></div>
 
   <div><button @click="getPromise">点击2s后返回一个Promise函数</button></div>
   
@@ -90,6 +90,8 @@ export default defineComponent({
     }
     function changeName() {
       obj.person1.name = "丁丁";
+      obj.rename = '么么哒'
+      console.log(obj.person1)
     }
     function changeHobby(){
       hobby.value = '钢化斩'; 
